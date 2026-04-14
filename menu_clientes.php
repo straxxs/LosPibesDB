@@ -16,7 +16,7 @@
 if (isset($_POST['guardar'])){
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
-    $DNI = $_post['DNI'];
+    $DNI = $_Post['DNI'];
     $email = $_POST['email'];
     $tel = $_POST['tel'];
     $sql_insertar = "INSERT INTO clientes (cli_nom, cli_ape, cli_DNI, cli_correo, cli_tel ) VALUES ('$nombre', '$apellido', '$DNI', '$email', '$tel')";
