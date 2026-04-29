@@ -1,13 +1,18 @@
-<?php include("menu.php");?>
-<?php include("conexion.php"); ?>
-
+<?php include("BD.php"); ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body>
+<div class="card">
 <h2>Registrar Venta</h2>
 
 <form method="POST">
-    Cliente:
     <select name="id_cli">
         <?php
-
         $clientes = $conexion->query("SELECT * FROM clientes");
         while ($c = $clientes->fetch_assoc()) {
             echo "<option value='{$c['id_cli']}'>{$c['cli_nom']}</option>";
@@ -15,7 +20,6 @@
         ?>
     </select>
 
-    Producto:
     <select name="id_pro">
         <?php
 
@@ -26,12 +30,11 @@
         ?>
     </select>
 
-    Cantidad:
-    <input type="number" name="cantidad" required>
+    <input type="number" placeholder="Cantidad" name="cantidad" required>
 
-    <button type="submit">Guardar</button>
+    <button type="submit">Registrar</button>
 </form>
-
+</div>
 <?php
 if ($_POST) {
     $id_cli = $_POST['id_cli'];
@@ -43,10 +46,10 @@ if ($_POST) {
     $conexion->query($sql);
 }
 ?>
-
+<div class="card">
 <h2>Listado de Ventas</h2>
 
-<table border="1">
+<table>
 <tr>
     <th>ID</th>
     <th>Cliente</th>
@@ -69,7 +72,11 @@ while ($fila = $resultado->fetch_assoc()) {
             <td>{$fila['cliente']}</td>
             <td>{$fila['producto']}</td>
             <td>{$fila['ven_cant']}</td>
-          </tr>";
+        </tr>";
 }
 ?>
 </table>
+<a href="index.html" class="btn-link">Volver al Menú Principal</a>
+</div>
+</body>
+</html>
