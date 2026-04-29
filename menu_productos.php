@@ -1,4 +1,13 @@
 <?php include "BD.php";?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body>
+    <div class="card">
 <h2>Cargar Producto</h2>
 
     <form method="POST">
@@ -18,6 +27,7 @@
         <li><button type="submit" name="guardar">Registrar</button></li>
         </ul>
     </form>
+    </div>
 
 <?php 
 if (isset($_POST['guardar'])){
@@ -30,9 +40,9 @@ if (isset($_POST['guardar'])){
 }
 ?>
 
-
+<div class="card">
 <h2>Listado de Productos</h2>
-    <table border="1">
+    <table>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -45,7 +55,7 @@ if (isset($_POST['guardar'])){
 $productos = $conexion->query("select * from producto");
 
 while($fila = $productos->fetch_assoc()) {
-     echo "<tr>
+    echo "<tr>
         <td>" . $fila["id_pro"] . "</td>
         <td>" . $fila["pro_nom"] . "</td>
         <td>" . $fila["pro_precio"] . "</td>
@@ -56,4 +66,7 @@ while($fila = $productos->fetch_assoc()) {
 ?>
 </table>
 <br>
-<a href="menu1.html">Volver al Menú Principal</a>
+<a href="index.html" class="btn-link">Volver al Menú Principal</a>
+</div>
+</body>
+</html>
