@@ -1,57 +1,69 @@
-<?php include "BD.php";?>
-<h2>Cargar Nuevo Cliente</h2>
+<?php include "BD.php"; ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Clientes</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body>
 
+<div class="card">
+    <h2>Cargar Nuevo Cliente</h2>
     <form method="POST" action="">
         <ul>
-        <li><input type="text" name="nombre" placeholder="Nombre del cliente" required></li>
-        <li><input type="apellido" name="apellido" placeholder="Apellido del cliente" required></li>
-        <li><input type="number" name="DNI" placeholder="DNI" required></li>
-        <li><input type="email" name="email" placeholder="Correo electrónico" required></li>
-        <li><input type="tel" name="tel" placeholder="Telefono" required></li>
-        <li><button type="submit" name="guardar">Registrar</button></li>
+            <li><input type="text" name="nombre" placeholder="Nombre del cliente" required></li>
+            <li><input type="text" name="apellido" placeholder="Apellido del cliente" required></li>
+            <li><input type="number" name="DNI" placeholder="DNI" required></li>
+            <li><input type="email" name="email" placeholder="Correo electrónico" required></li>
+            <li><input type="tel" name="tel" placeholder="Teléfono" required></li>
+            <li><button type="submit" name="guardar">Registrar Cliente</button></li>
         </ul>
     </form>
+</div>
 
 <?php 
 if (isset($_POST['guardar'])){
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
-    $DNI = $_Post['DNI'];
+    $DNI = $_POST['DNI']; // Corregido $_post a $_POST
     $email = $_POST['email'];
     $tel = $_POST['tel'];
     $sql_insertar = "INSERT INTO clientes (cli_nom, cli_ape, cli_DNI, cli_correo, cli_tel ) VALUES ('$nombre', '$apellido', '$DNI', '$email', '$tel')";
-    
-    if ($conexion->query($sql_insertar) === TRUE) {
-        echo "<p style='color:green;'>Cliente guardado con éxito.</p>";
-    } else {
-        echo "Error: " . $conexion->error;
-    }
+    $conexion->query($sql_insertar); // Ejecutar la consulta
 }
 ?>
 
+<div class="card">
+    <h2>Listado de Clientes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php 
+        $sql = "SELECT * FROM clientes";
+        $resultado = $conexion->query($sql);
+        while($fila = $resultado->fetch_assoc()) {
+            echo "<tr>
+                <td>" . $fila["id_cli"] . "</td>
+                <td>" . $fila["cli_nom"] . " " . $fila["cli_ape"] . "</td>
+                <td>" . $fila["cli_correo"] . "</td>
+                <td>" . $fila["cli_tel"] . "</td>
+                </tr>";
+        }
+        ?>
+        </tbody>
+    </table>
+    <br>
+    <a href="index.html" class="btn-link">← Volver al Menú Principal</a>
+</div>
 
-<h2>Listado de Clientes</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Telefono</th>
-        </tr>
-
-<?php 
-$sql = "select * from clientes";
-$resultado = $conexion->query($sql);
-
-while($fila = $resultado->fetch_assoc()) {
-     echo "<tr>
-        <td>" . $fila["id_cli"] . "</td>
-        <td>" . $fila["cli_nom"] . "</td>
-        <td>" . $fila["cli_correo"] . "</td>
-        <td>" . $fila["cli_tel"] . "</td>
-        </tr>";
-}
-?>
-</table>
-<br>
-<a href="menu1.html">Volver al Menú Principal</a>
+</body>
+</html>
