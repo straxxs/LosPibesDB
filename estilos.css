@@ -145,3 +145,55 @@ tr:hover td {
 }
 
 .btn-link:hover { color: white; }
+
+/*
+menu1
+*/
+
+header {
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+    background: var(--gradient); /* Usa el gradiente definido en root */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    letter-spacing: -1px;
+}
+
+.menu1 {
+    background: var(--glass-bg); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    width: fit-content;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.menu1 ul {
+    display: flex; 
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu1 ul li a {
+    text-decoration: none;
+    color: var(--dark); 
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.menu1 ul li a:hover {
+    background: var(--gradient);
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+}
